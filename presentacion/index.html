@@ -4,7 +4,7 @@
 		<meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
 
-		<title>Análisis y diseño de Aplicaciones</title>
+		<title>Programación Web</title>
 
 		<link rel="stylesheet" href="css/reveal.css">
 		<link rel="stylesheet" href="css/theme/black.css">
@@ -26,171 +26,128 @@
 			<div class="slides">
 				<section>
           <img data-src="img/logo_white.png" width="25%" height="25%" style="margin: none; background: none; border: none; box-shadow: none;">
-          <h2>Análisis y diseño de Aplicaciones</h2>
+          <h2>Programación Web</h2>
           <p>
-            <small>Santiago Moreno</small>
+            <small>Rodrigo Albano</small>
           </p>
+          <img data-src="img/logo_linux.png" width="15%" height="15%" style="margin: none; background: none; border: none; box-shadow: none;">
+          <img data-src="img/logo_apache.png" width="25%" height="25%" style="margin: none; background: none; border: none; box-shadow: none;">
+          <img data-src="img/logo_mysql.png" width="25%" height="25%" style="margin: none; background: none; border: none; box-shadow: none;">
+          <img data-src="img/logo_php.png" width="25%" height="25%" style="margin: none; background: none; border: none; box-shadow: none;">
         </section>
 
 				<section>
           <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
           <h2>Indice</h2>
           <ol>
-            <li><a href="#/2">Introducción a la ingeniería de software</a></li>
-            <li><a href="#/3">Ingeniería de requerimientos</a></li>
-            <li><a href="#/4">Análisis</a></li>
+            <li><a href="#/2">Instalar ambiente</a></li>
+            <!-- Descargar e Instalar los Software a Utilizar (XAMPP, Sublime Text o Visual Studio Code)
+            Imprimir el primer Hola Mundo -->
+            <li><a href="#/3">Aprendiendo PHP</a></li>
+            <!-- Sintaxis
+            Variables
+            Tipo de Datos
+            Comentarios
+            Expresiones y Operadores
+            Funciones
+            Ejercicios -->
+            <li><a href="#/4">Diseño de Aplicaciones Web</a></li>
+            <!-- Diseño de formularios
+            Verbos (PUT - GET - POST - HEAD - DELETE)
+            REST
+            Codigos HTTP
+            Formato JSON
+            Interaccion con API -->
+            <li><a href="#/5">Funciones útiles</a></li>
+            <!-- Cookies
+            File-Uploads
+            Correo -->
+            <li><a href="#/6">Trabajando con Base de Datos</a></li>
+            <!-- El manejo de Base de Datos MySQL
+            Manipulación de una Base de Datos con PHP
+            Consideraciones de Seguridad mysqli -->
+            <li><a href="#/7">Programación Orientada a Objetos</a></li>
+            <!-- Declaración y definición de Clases
+            Creación de Objetos
+            Métodos y atributos de los objetos
+            Herencia -->
+            <li><a href="#/8">Control de Versiones</a></li>
           </ol>
         </section>
 
         <!--
-        TEMA 1: Introducción - inicio
+        TEMA 1: Instalar ambiente
         -->
         <section>
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Introducción a la ingeniería de software</h2>
+            <h2>Instalar ambiente</h2>
           </section>
 
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>El proceso del software</h2>
             <ul>
-              <li>Para el desarrollo de un producto de software se necesita un conjunto estructurado de actividades</li>
-              <li>Existen varios modelos de procesos. <br>Todos incluyen:
-                <ol>
-                  <li><span style="color: #2b69a9">Especificación</span></li>
-                  <li><span style="color: #2b69a9">Diseño</span></li>
-                  <li><span style="color: #2b69a9">Implementación</span></li>
-                  <li><span style="color: #2b69a9">Validación</span></li>
-                  <li><span style="color: #2b69a9">Evolución</span></li>
-                </ol>
-              </li>
+              <li>Editor de Texto Sublime: https://www.sublimetext.com/</li>
+              <li>Instalar Servicio Apache y PHP con XAMPP: https://www.apachefriends.org/es/index.html</li>
             </ul>
+            <img data-src="img/xampp.png" width="60%" height="60%" style="margin: none; background: none; border: none; box-shadow: none;">
           </section>
 
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Clasificaciones</h2>
+            <h2>Directorio Root de Apache</h2>
             <ul>
-              <li>Procesos dirigidos por planes</li>
-              <li>Procesos ágiles</li>
+              <li>En Windows el directorio root de apache es: <b>"C:/xampp/htdocs"</b></li>
+              <li>En Linux el directorio root de apache es: <b>"/opt/lampp/htdocs"</b></li>
             </ul>
-            <p>En la practica los procesos incluyen elementos de ambos enfoques</p>
+            <p>Creamos una carpeta llamada "progweb" bajo la ruta htdocs</p>
           </section>
 
-          <section>
+          <section data-markdown>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Modelo en cascada</h2>
-            <img src="img/modelo_de_cascada.png" width="80%" height="80%">
-          </section>
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Modelo en cascada - Problemas</h2>
+            
+          <script type="text/template">
+            ## phpinfo y "Hola Mundo"
 
-              <p>Dificultad de responder a los cambios de requerimientos del cliente</p>
-              <p>Entrega tardía de valor para el cliente</p>
+            Crear archivo "phpinfo.php" dentro de "progweb"
 
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Modelo Incremental</h2>
-            <img src="img/modelo_incremental.png" width="80%" height="80%">
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Modelo Incremental - Beneficios</h2>
-            <p>Se reduce el costo de acomodar los cambios en los requisitos</p>
-            <p>Es más fácil obtener retroalimentación del cliente</p>
-            <p>Se pueden realizar entregas más rápidas de software</p>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Modelo Incremental - Problemas</h2>
-            <p>Trazabilidad de los cambios</p>
-            <p>Degradado del sistema</p>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Especificación</h2>
-            <ul>
-              <li>Relevamiento y análisis de requisitos</li>
-              <li>Especificación de requisitos</li>
-              <li>Validación de requisitos</li>
-            </ul>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Diseño</h2>
-            <p style="font-size: xx-large">Diseña la estructura del sotware que satisface la especificación</p>
-            <ul>
-              <li style="font-size: xx-large">
-                <span style="color: #2b69a9">Diseño de Arquitectura:</span> identificar todas las estructuras del sistema, los principales componentes, sus relaciones y como estan distribuidos.
-              </li>
-              <li style="font-size: xx-large">
-                <span style="color: #2b69a9">Diseño de la base de datos:</span> diseñar las estructuda del sistema de datos y como van a ser representados en la base
-              </li>
-              <li style="font-size: xx-large">
-                <span style="color: #2b69a9">Diseño de la intefaz de usuario:</span> se definen las interfaces ente los componentes del sistema
-              </li>
-            </ul>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Implementación</h2>
-            <p>El programa es desarrollado mediante la implementación.</p>
-            <p>Puede ser un programa único o varios programas.</p>
-            <p>El diseño y la implementación son actividades por lo general intercaladas</p>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Validación</h2>
-            <p>La validación y verificación pretende mostrar que el sistema se ajusta a su especificación y cumple con los requisitos del cliente</p>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Validación - Etapas</h2>
-            <ul>
-              <li>Pruebas Unitarias</li>
-              <li>Pruebas de sistema o integración</li>
-              <li>Pruebas de aceptación</li>
-            </ul>
-          </section>
-
-          <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Ingeniería de software</h2>
-            <p>Es una disciplina de la ingeniería que se ocupa de todos los aspectos de la producción de software desde las primeras etapas de la especificación del sistema hasta el mantenimiento del sistema una vez que se ha puesto en uso.</p>
+            ```
+            <?php 
+              phpinfo();
+            ?>
+            ```
+            Crear archivo "index.php" dentro de "progweb"
+            ```
+            <?php 
+              echo "Hola Mundo";
+            ?>
+            ```
+          </script>  
           </section>
         </section>
         <!--
-        TEMA 1: Introducción - Fin
+        TEMA 1: Instalar ambiente
         -->
 
         <!--
-        TEMA 2: Requerimientos - Inicio
+        TEMA 2: Aprendiendo PHP
 				-->
         <section>
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Ingeniería de requerimientos</h2>
+            <h2>Aprendiendo PHP</h2>
           </section>
 
           <section>
-            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Definiciones</h2>
-            <p style="color: #2b69a9">Requisitos</p>
-            <p>Descripción de los servicios que debe brindar un sistema y sus restricciones</p>
-            <p>Requisitos definen el Qué (el problema) del sistema</p>
-            <p style="color: #2b69a9">Ingeniería de Requisitos</p>
-            <p>Proceso de descubrir, analizar, documentar y verificar esos servicios y restricciones</p>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 50px;">
+            <h2>¿Qué es PHP? (Hypertext Preprocessor)</h2>
+            <ul>
+              <li>Lenguaje de programación del lado del servidor.</li>
+              <li>De código abierto, cualquiera puede modificar la estructura y la forma de cómo hacer las cosas con PHP.</li>
+              <li>Lenguaje dinámico.</li>
+              <li>Todos los archivos deben terminar con ".php"</li>
+              <li>Todo el código PHP debe estar dentro de la etiqueta de inicio <?php y finalización ?>.</li>
+            </ul>
           </section>
 
           <section>
@@ -257,7 +214,7 @@
 
         </section>
         <!--
-        TEMA 2: Requerimientos - Fin
+        TEMA 2: Aprendiendo PHP Fin
         -->
 
         <!--
