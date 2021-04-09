@@ -239,17 +239,165 @@
             </code></pre>
           </section>
 
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>PHP PDO - Data Objects</h3>
+
+            <ul>
+              <li>Una extensión para acceder a bases de datos.</li>
+              <li>Permite acceder a diferentes sistemas de base de datos con un controlador específico (MySQL, SQLite, Oracle, etc.)</li>
+              <li>El sistema PDO se fundamenta en 3 clases: PDO, PDOStatement y PDOException. PDO - mantener la conexión a la base de datos. PDOStatement, la que maneja las sentencias SQL y devuelve los resultados. La clase PDOException se utiliza para manejar los errores.</li>
+              <li>Documentación: <a href="https://www.php.net/manual/es/book.pdo.php" target="_blank">Ir documentación</a></li>
+            </ul>
+
+          </section>
+
+
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Implementación de una Clase utilzando PDO</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+
+                class DB{
+                    private $host;
+                    private $db;
+                    private $user;
+                    private $password;
+                    private $charset;
+
+                    public function __construct(){
+                        $this->host     = 'localhost';
+                        $this->db       = 'mibase';
+                        $this->user     = 'user';
+                        $this->password = 'password';
+                        $this->charset  = 'utf8mb4';
+                    }
+
+                    function connect(){
+                    
+                        try{
+
+                            
+                            $connection = "mysql:host=".$this->host.";dbname=" . $this->db . ";charset=" . $this->charset;
+                            $options = [
+                                PDO::ATTR_ERRMODE            => PDO::ERRMODE_EXCEPTION,
+                                PDO::ATTR_EMULATE_PREPARES   => false,
+                            ];
+                            //$pdo = new PDO($connection, $this->user, $this->password, $options);
+                            $pdo = new PDO($connection,$this->user,$this->password);
+                        
+                            return $pdo;
+
+
+                        }catch(PDOException $e){
+                            print_r('Error connection: ' . $e->getMessage());
+                        }   
+                    }
+                }
+
+
+            </code></pre>
+          </section>
+
+        <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Utilizando Clase Extendida de DB</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+
+              // Primero incluimos el código que contiene la Clase DB
+              include_once 'db.php';
+
+              class Pelicula extends DB{
+                  
+                  function obtenerPeliculas(){
+                      $query = $this->connect()->query('SELECT * FROM pelicula');
+                      return $query;
+                  }
+
+                  function obtenerPelicula($id){
+                      $query = $this->connect()->prepare('SELECT * FROM pelicula WHERE idPelicula = :id');
+                      $query->execute(['id' => $id]);
+                      return $query;
+                  }
+
+                  function nuevaPelicula($pelicula){
+                      $query = $this->connect()->prepare('INSERT INTO pelicula (nombre, img) VALUES (:nombre, :img)');
+                      $query->execute(['nombre' => $pelicula['nombre'], 'img' => $pelicula['img']]);
+                      return $query;
+                  }
+
+              }
+            </code></pre>
+          </section>
+
         </section>
 				<!--
 				TEMA 5: Trabajando con Base de Datos - Fin
 				-->
         <!--
-        TEMA 6: Programacion Orientada a Objetos - Inicio
+        TEMA 6: Programación Orientada a Objetos - Inicio
         -->
         <section>
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
             <h2>Programación Orientada a Objetos</h2>
+          </section>
+
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Creación de Clase</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+
+              class Persona
+              {
+                private $fechaNacimiento = '1991-09-03';
+                private $nombre = 'Rodrigo';
+                private $apellido = 'Albano';
+
+                //Constructor Vacio
+                public function __construct()
+                {
+                  $this->nombre = '';
+                  $this->apellido = '';
+                  $this->fechaNacimiento = '';
+                }
+                // $Persona = new Persona();
+
+                //Constructor con Parámetros
+                public function __construct($nombre, $apellido, $fechaNacimiento)
+                {
+                  $this->nombre = $nombre;
+                  $this->apellido = $apellido;
+                  $this->fechaNacimiento = $fechaNacimiento;
+                }
+                // $Persona = new Persona("Pepe", "Lopez", "1980-01-01");
+
+                //Destructor
+                public function __destruct()
+                {
+                  //Hacer algo cuando se destruye el objeto
+                }
+
+                public function nombreCompleto(){
+                  return $this->nombre." ".$this->apellido;
+                  
+                }
+
+                public function edad(){
+                  //Calcular edad
+                  list($ano,$mes,$dia) = explode("-",$this->fechaNacimiento);
+                  $ano_diferencia  = date("Y") - $ano;
+                  $mes_diferencia = date("m") - $mes;
+                  $dia_diferencia   = date("d") - $dia;
+                  if ($dia_diferencia < 0 || $mes_diferencia < 0){
+                      $ano_diferencia--;
+                  }
+                  return $ano_diferencia;
+                }
+              }
+
+              ?>
+            </code></pre>
           </section>
         </section>
         <!--
