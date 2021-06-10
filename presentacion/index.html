@@ -71,7 +71,8 @@
             Creación de Objetos
             Métodos y atributos de los objetos
             Herencia -->
-            <li><a href="#/8">Control de Versiones</a></li>
+            <!-- Framework Laravel -->
+            <li><a href="#/8">Framework Laravel</a></li>
           </ol>
         </section>
 
@@ -404,18 +405,212 @@
         <!--
         TEMA 6: Programacion Orientada a Objetos - Fin
         -->
+        
         <!--
-        TEMA 7: Control de Versiones - Inicio
+        TEMA 7: Laravel Framework - Inicio
         -->
         <section>
           <section>
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
-            <h2>Control de Versiones</h2>
+            <h2>Laravel Framework</h2>
+          </section>
+
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>¿Qué es Laravel?</h3>
+
+            <ul>
+              <li>Laravel es un framework de PHP para ayudarnos en un tipo de desarrollo sobre aplicaciones escritas en este lenguaje de programación</li>
+              <li>Framework del tipo MVC (Modelo-Vista-Controlador) da como resultado que podamos “despreocuparnos” (por así decirlo) en ciertas aspecto del desarrollo</li>
+              <li>Interfaz de comando "Artisan"</li>
+              <li>Documentación: <a href="https://laravel.com/docs/" target="_blank">Ir documentación</a></li>
+            </ul>
+
+          </section>
+
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Configurar Entorno - 1</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // Para Laravel 8 es necesario la utilización de Composer como su manejador de dependencias.
+              // Descargar e instalar desde: https://getcomposer.org/
+              // Tutorial para instalar Composer: https://styde.net/instalacion-de-composer/
+
+              // Instalar Laravel con Composer
+              $ composer global require laravel/installer
+
+              // Setear nuestro proyecto
+              $ composer create-project --prefer-dist laravel/laravel anima-api
+
+              // Nos paramos en el proyecto y probamos..
+              $ cd anima-api
+              $ php artisan serv
+
+              // Ingresamos a la Web "http://127.0.0.1:8000" y chequeamos el acceso. Si vemos la Web de "Laravel" estamos ok!
+
+              // Creamos el Modelo "Pelicula"
+              $ php artisan make:model Pelicula
+
+              // Creamos el Controlador "PeliculaController" utilizamos "--resource para crear los "CRUD" basicos
+              $ php artisan make:controller PeliculaController --resource
+
+              // Creamos API controller para estandarizar los retornos de nuestra API
+              $ php artisan make:controller ApiController
+
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Configurar Entorno - 2</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // CONFIGURAMOS V-HOST
+
+              // Agregamos las siguientes lineas al archivo “c:\xampp\apache\conf\extra\httpd-vhosts.conf”
+              <VirtualHost *:80>
+                  DocumentRoot "C:/xampp/htdocs/anima_api/public"
+                  ServerName anima-api.localhost
+                  ErrorLog "logs/anima-api_error.localhost.log"
+                  CustomLog "logs/anima-api_access.localhost.log" common
+              </VirtualHost>
+              // Reiniciamos el servicio APACHE
+              // Probamos ingresando a la URL “http://anima-api.localhost/”
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Modificamos Código - BD</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // Modificamos el archivo “.env” para configurar la conexión a la Base de Datos.
+              DB_CONNECTION=mysql
+              DB_HOST=127.0.0.1
+              DB_PORT=3306
+              DB_DATABASE=peliculas
+              DB_USERNAME=root
+              DB_PASSWORD=
+              //Agregamos las siguientes lineas al archivo “config/database.php” para configurar la conexión a la Base de Datos
+              'peliculas' => [
+                          'driver' => 'mysql',
+                          'url' => env('DATABASE_URL'),
+                          'host' => env('DB_HOST', '127.0.0.1'),
+                          'port' => env('DB_PORT', '3306'),
+                          'database' => env('DB_DATABASE', 'forge'),
+                          'username' => env('DB_USERNAME', 'forge'),
+                          'password' => env('DB_PASSWORD', ''),
+                          'unix_socket' => env('DB_SOCKET', ''),
+                          'charset' => 'utf8mb4',
+                          'collation' => 'utf8mb4_unicode_ci',
+                          'prefix' => '',
+                          'prefix_indexes' => true,
+                          'strict' => true,
+                          'engine' => null,
+                          'options' => extension_loaded('pdo_mysql') ? array_filter([
+                              PDO::MYSQL_ATTR_SSL_CA => env('MYSQL_ATTR_SSL_CA'),
+                          ]) : [],
+                      ],
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Modificamos Código - Pelicula (Modelo)</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              namespace App\Models;
+
+              use Illuminate\Database\Eloquent\Model;
+
+              class Pelicula extends Model
+              {
+              
+                  protected $connection='peliculas';
+                  protected $table='pelicula';
+                  protected $primaryKey = "idPelicula";
+                  public $timestamps=false;
+              }
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Modificamos Código - ApiController (Controlador)</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // Modificamos el código de ApiController para estandarizar los retornos de nuestra API
+              namespace App\Http\Controllers;
+
+              use Illuminate\Http\Request;
+
+              class ApiController extends Controller
+              {
+                  public function sendResponse($result, $message){
+                      $response = [
+                          "success" => true,
+                          "data" => $result,
+                          "message" => $message
+                      ];
+                      return response()->json($response, 200);
+                  }
+
+                  public function sendError($error, $errorMessages = [], $code = 404){
+                      $response = [
+                          "success" => false,
+                          "error" => $error,
+                          "errorMessages" => $errorMessages
+                      ];
+                      return response()->json($response, $code);
+                  }
+              }
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Modificamos Código - PeliculaController (Controlador)</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // Editamos las funciones “index”, “store” y “show”
+              public function index()
+                  {
+                      $Peliculas = Pelicula::where('activo','=',1)
+                                  ->select('idPelicula','nombre','img')
+                                  ->get();
+
+                      return $this->sendResponse($Peliculas,"Peliculas obtenidas correctamente");
+                      // return $this->sendError("Error Conocido", "Error controlado", 200);
+                  }
+              public function store(Request $request)
+                  {
+                      try {
+                          $Pelicula = new Pelicula();
+                          $Pelicula->nombre = $request->input('img');
+                          $Pelicula->img = $request->input('nombre');
+                          $Pelicula->save();
+                          return $this->sendResponse($Pelicula,"Pelicula ingresada correctamente");
+                      } catch (Exception $e) {
+                          return $this->sendError("Error Conocido", "Error al crear la Pelicula", 200);
+                      }
+                      
+                  }
+              public function show($id)
+              {
+                  $Pelicula = Pelicula::where('idPelicula',$id)
+                              ->select('idPelicula','nombre','img')
+                              ->get();
+              return $this->sendResponse($Pelicula,"Pelicula obtenida correctamente");
+              }
+
+            </code></pre>
+          </section>
+          <section>
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Modificamos Código - Rutas a la API</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // Agregamos la siguiente ruta a la API para exponer los endpoint del CRUD
+              
+              Route::apiResource('/pelicula', App\Http\Controllers\PeliculaController::class);
+              
+              // Probamos las rutas desde la consola con 
+              $ php artisan route:list
+            </code></pre>
           </section>
         </section>
         <!--
-        TEMA 7: Control de Versiones - Fin
-n        -->
+        TEMA 7: Laravel Framework- Fin
+        -->
 
 			</div>
 		</div>
