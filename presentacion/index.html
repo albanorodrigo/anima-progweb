@@ -599,10 +599,14 @@
             <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
             <h3>Modificamos Código - Rutas a la API</h3>
             <pre><code class="hljs" data-trim contenteditable>
+              
+              
               // Agregamos la siguiente ruta a la API para exponer los endpoint del CRUD
-              
+              // Si tenemos la versión 8 de Laravel
               Route::apiResource('/pelicula', App\Http\Controllers\PeliculaController::class);
-              
+              // Si tenemos la versión 7 de Laravel
+              Route::resource('pelicula', 'PeliculaController');
+
               // Probamos las rutas desde la consola con 
               $ php artisan route:list
             </code></pre>
