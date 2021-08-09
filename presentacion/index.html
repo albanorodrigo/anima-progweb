@@ -576,8 +576,8 @@
                   {
                       try {
                           $Pelicula = new Pelicula();
-                          $Pelicula->nombre = $request->input('img');
-                          $Pelicula->img = $request->input('nombre');
+                          $Pelicula->nombre = $request->input('nombre');
+                          $Pelicula->img = $request->input('img');
                           $Pelicula->save();
                           return $this->sendResponse($Pelicula,"Pelicula ingresada correctamente");
                       } catch (Exception $e) {
@@ -610,6 +610,40 @@
               // Probamos las rutas desde la consola con 
               $ php artisan route:list
             </code></pre>
+          </section>
+
+          <section>
+
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Adicional - Validaciones</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+              // En el inicio del Controlador
+              use Validator;
+
+              // Dentro del método
+              // Ej:1
+              $validator = Validator::make($request->all(), [
+                  'attached' => 'required|mimes:jpeg,jpg,png,ico,sgi,bmp,pdf,csv,xls,xlsx,doc,docx,txt,pptx|max:15360'
+              ]);
+              if($validator->fails()){
+                  return $this->sendError("Error de validación", $validator->errors(), 422);
+              }
+
+              // Ej:2
+              $validator = Validator::make($request->all(), [
+                  'csvFile' => 'required|mimes:csv,xls,xlsx|max:15360'
+              ]);
+              if($validator->fails()){
+                  return $this->sendError("Error de validación", $validator->errors(), 422);
+              }
+
+              // Ej:3
+              $validatedData = $request->validate([
+                  'title' => ['required', 'unique:posts', 'max:255'],
+                  'body' => ['required'],
+              ]);
+            </code></pre>
+            
           </section>
         </section>
         <!--
