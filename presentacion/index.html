@@ -645,6 +645,45 @@
             </code></pre>
             
           </section>
+
+          <section>
+
+            <img data-src="img/logo_white.png" style="background: none; border: none; box-shadow: none; position: fixed; top: 0; right: 0; height: 100px;">
+            <h3>Adicional - Envio Mail</h3>
+            <pre><code class="hljs" data-trim contenteditable>
+
+              // *********** En .env *********** //
+              
+              MAIL_DRIVER=smtp
+              MAIL_HOST=mail.example.com
+              MAIL_PORT=25
+              MAIL_USERNAME=username
+              MAIL_PASSWORD=password
+              MAIL_ENCRYPTION=null
+              MAIL_FROM_ADDRESS=username@example.com
+              MAIL_FROM_NAME="Notificaciones Example"
+
+              // *********** En el Controlador *********** //
+
+              // Importar Librería en el Controller
+              use Mail;
+
+              // En Controller
+              Mail::send({VIEW_BLADE}, $data, function($msj) use ($data){
+                  $msj->subject({ASUNTO});
+                  $msj->to({DESTINATARIOS});
+              });
+
+              // Ej
+              Mail::send('templatesEmails.MailNotificacion', $data, function($msj) use ($data){
+                  $msj->subject('Envio de TOKEN');
+                  $msj->to($ArrayDestinatarios);
+              });
+              
+            </code></pre>
+            
+          </section>
+
         </section>
         <!--
         TEMA 7: Laravel Framework- Fin
